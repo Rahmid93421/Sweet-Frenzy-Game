@@ -1,0 +1,2941 @@
+[gd_scene load_steps=54 format=3 uid="uid://dskg2y4hrnceg"]
+
+[ext_resource type="Script" uid="uid://bvcghjx84d68g" path="res://scripts/main_node.gd" id="1_32378"]
+[ext_resource type="Texture2D" uid="uid://nt1eb7ecs0at" path="res://assets/images/background.png" id="1_e3fa1"]
+[ext_resource type="Texture2D" uid="uid://2dtx7putyjf5" path="res://assets/sprites/banana.png" id="2_p3mmm"]
+[ext_resource type="Theme" uid="uid://dx3h5ap1xuwm" path="res://assets/misc/themes/themes.tres" id="2_t1rhp"]
+[ext_resource type="Texture2D" uid="uid://dc2vui2fyyq2p" path="res://assets/sprites/spin.png" id="4_7exka"]
+[ext_resource type="Script" uid="uid://by61mkjxqp70r" path="res://scripts/symbols.gd" id="4_dtpcl"]
+[ext_resource type="Texture2D" uid="uid://emhup0u0ptgw" path="res://assets/sprites/lolli.png" id="5_63mur"]
+[ext_resource type="Script" uid="uid://1gdk5v2g83so" path="res://scripts/dummy_item.gd" id="5_81nw7"]
+[ext_resource type="Texture2D" uid="uid://b6n4qm02wp3vy" path="res://assets/sprites/jelly.png" id="6_xd815"]
+[ext_resource type="FontFile" uid="uid://ba1r8ut24a4fs" path="res://assets/misc/fonts/FreeCheese-dryYR.ttf" id="8_81nw7"]
+[ext_resource type="Script" uid="uid://vpmis7qlyj6e" path="res://scripts/action_panel.gd" id="9_08ia4"]
+[ext_resource type="Script" uid="uid://dlit48guvdrlu" path="res://scripts/audio_stream_player.gd" id="10_63mur"]
+[ext_resource type="StyleBox" uid="uid://cgtmi58jjel16" path="res://assets/misc/themes/bet_buttons.tres" id="10_dqosy"]
+[ext_resource type="Script" uid="uid://c6kyst00wxsbd" path="res://scripts/info_panel.gd" id="12_08ia4"]
+[ext_resource type="Script" uid="uid://tbyaingke3lb" path="res://scripts/stats_bar.gd" id="13_bwk7n"]
+[ext_resource type="Texture2D" uid="uid://cdfwnbdxpsqsu" path="res://assets/sprites/apple.png" id="13_y7imk"]
+[ext_resource type="StyleBox" uid="uid://dim5vv1muhsni" path="res://assets/misc/themes/button_feature_spin.tres" id="15_kv45b"]
+[ext_resource type="AudioStream" uid="uid://c8b4jqvgslq7e" path="res://assets/sounds/Jeff_Redd_-_HUQQA_Official_Video_(getmp3.pro).mp3" id="18_kv45b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81nw7"]
+bg_color = Color(0.624003, 0.11914, 0.496196, 0.643137)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.670588, 0.94902, 1)
+border_blend = true
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwk7n"]
+bg_color = Color(0.87451, 0.431373, 0.623529, 0.741176)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.670588, 0.94902, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 1
+
+[sub_resource type="Animation" id="Animation_ioys6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:minSizeY")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4mvgd"]
+resource_name = "ShowSymbolInHistory"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:minSizeY")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 40.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ioys6"]
+_data = {
+&"RESET": SubResource("Animation_ioys6"),
+&"ShowSymbolInHistory": SubResource("Animation_4mvgd")
+}
+
+[sub_resource type="Animation" id="Animation_81nw7"]
+resource_name = "ButtonAnimation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.4, 1.4), Vector2(0.8, 0.8)]
+}
+
+[sub_resource type="Animation" id="Animation_63mur"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqosy"]
+_data = {
+&"ButtonAnimation": SubResource("Animation_81nw7"),
+&"RESET": SubResource("Animation_63mur")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd815"]
+bg_color = Color(0.0784314, 0.0784314, 0.0784314, 0.901961)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 0.670588, 0.94902, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xd815"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_08ia4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dtpcl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qfydw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y7imk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bwk7n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kv45b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4mvgd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ioys6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b8ps5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gaj6x"]
+
+[sub_resource type="Animation" id="Animation_bwk7n"]
+resource_name = "CloseInfoPanel"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-256.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-189.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [256.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [189.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_y7imk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.319992]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-189.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.12]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [189.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Content:visible_characters")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qfydw"]
+resource_name = "ShowInfoPanel"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -256.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -189.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 256.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 189.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Content:visible_characters")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.01),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwk7n"]
+_data = {
+&"CloseInfoPanel": SubResource("Animation_bwk7n"),
+&"RESET": SubResource("Animation_y7imk"),
+&"ShowInfoPanel": SubResource("Animation_qfydw")
+}
+
+[sub_resource type="Animation" id="Animation_dtpcl"]
+resource_name = "Init"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Control/Multiplier/RichTextLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_top")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-25.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_bottom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [26.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Spinnnning:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/Panel/RichTextLabel4:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Control/Panel/RichTextLabel3:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Control/Panel/FeatureSpinButton:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_xd815"]
+resource_name = "MultiTheWinnings"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-25.0, 526.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [26.0, 577.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Control/Multiplier/RichTextLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_p3mmm"]
+resource_name = "PopAnimation"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:symbolSize")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.5, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:symbolRota")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 33.0, -33.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:dummyMinSize")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [85.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_top")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-25.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_right")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_bottom")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [26.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Control/Control/Multiplier/RichTextLabel:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gaj6x"]
+resource_name = "PrepareFeatureSpins"
+length = 1.25
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spinnnning:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spinnnning:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Panel/FeatureSpinButton:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/Panel/RichTextLabel3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/Panel/RichTextLabel4:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mbi2d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Panel/SpinButton/TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:symbolSize")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:symbolRota")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:dummyMinSize")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [85.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_top")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-25.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_bottom")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [26.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/Control/Multiplier/RichTextLabel:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_left")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_right")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("..:popRotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Control/Control/SlotPanel/Symbols:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3.05176e-05, 5.99998)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Spinnnning:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Spinnnning:color")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Control/Panel/FeatureSpinButton:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Control/Panel/RichTextLabel3:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Control/Panel/RichTextLabel4:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_v6n0w"]
+resource_name = "RevertFeatureSpins"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spinnnning:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spinnnning:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Panel/FeatureSpinButton:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/Panel/RichTextLabel3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Control/Panel/RichTextLabel4:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_08ia4"]
+resource_name = "RevertMultiLabel"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-25.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Control/Multiplier/RichTextLabel:offset_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [26.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Control/Multiplier/RichTextLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_b8ps5"]
+resource_name = "RollAnimation"
+length = 1.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Control/SlotPanel/Symbols:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-3.05176e-05, 5.99998), Vector2(0, 800), Vector2(-800, 800), Vector2(-800, -800), Vector2(0, -800), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kv45b"]
+resource_name = "RollThePop"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:popRotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 360.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_dqosy"]
+resource_name = "UnPop"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:symbolSize")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_81nw7"]
+_data = {
+&"Init": SubResource("Animation_dtpcl"),
+&"MultiTheWinnings": SubResource("Animation_xd815"),
+&"PopAnimation": SubResource("Animation_p3mmm"),
+&"PrepareFeatureSpins": SubResource("Animation_gaj6x"),
+&"RESET": SubResource("Animation_mbi2d"),
+&"RevertFeatureSpins": SubResource("Animation_v6n0w"),
+&"RevertMultiLabel": SubResource("Animation_08ia4"),
+&"RollAnimation": SubResource("Animation_b8ps5"),
+&"RollThePop": SubResource("Animation_kv45b"),
+&"UnPop": SubResource("Animation_dqosy")
+}
+
+[node name="MainNode" type="Node"]
+script = ExtResource("1_32378")
+metadata/_edit_horizontal_guides_ = [809.0]
+
+[node name="Interface_Layout" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Interface_Layout"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Interface_Layout/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -128.0
+offset_right = 152.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_e3fa1")
+expand_mode = 4
+
+[node name="BackgroundEffect" type="ColorRect" parent="Interface_Layout/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -128.0
+offset_right = 152.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="Title" type="RichTextLabel" parent="Interface_Layout/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.159
+anchor_right = 1.0
+anchor_bottom = 0.159
+offset_top = -97.52
+offset_bottom = 96.48
+grow_horizontal = 2
+theme = ExtResource("2_t1rhp")
+bbcode_enabled = true
+text = "[center]SWEET FRENZY[/center]"
+
+[node name="Control" type="Control" parent="Interface_Layout/Control"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.424
+anchor_right = 0.5
+anchor_bottom = 0.424
+offset_left = -349.0
+offset_top = -263.72
+offset_right = 342.0
+offset_bottom = 263.28
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SlotPanel" type="Panel" parent="Interface_Layout/Control/Control"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.234
+anchor_top = 0.114
+anchor_right = 1.0
+anchor_bottom = 0.991
+offset_left = 0.305954
+offset_top = -0.0780334
+offset_right = 1.0
+offset_bottom = -0.257019
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_t1rhp")
+
+[node name="Symbols" type="GridContainer" parent="Interface_Layout/Control/Control/SlotPanel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.974
+offset_left = -3.05176e-05
+offset_top = 5.99998
+offset_bottom = 6.01199
+grow_horizontal = 2
+grow_vertical = 2
+columns = 6
+script = ExtResource("4_dtpcl")
+
+[node name="Column1" type="VBoxContainer" parent="Interface_Layout/Control/Control/SlotPanel/Symbols"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 450)
+layout_mode = 2
+alignment = 2
+
+[node name="DummyItem" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1/DummyItem"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("5_63mur")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem2" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1/DummyItem2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem3" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1/DummyItem3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem4" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1/DummyItem4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem5" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column1/DummyItem5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Column2" type="VBoxContainer" parent="Interface_Layout/Control/Control/SlotPanel/Symbols"]
+clip_contents = true
+layout_mode = 2
+alignment = 2
+
+[node name="DummyItem" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2/DummyItem"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("5_63mur")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem2" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2/DummyItem2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem3" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2/DummyItem3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem4" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2/DummyItem4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem5" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column2/DummyItem5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Column3" type="VBoxContainer" parent="Interface_Layout/Control/Control/SlotPanel/Symbols"]
+clip_contents = true
+layout_mode = 2
+alignment = 2
+
+[node name="DummyItem" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3/DummyItem"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("5_63mur")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem2" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3/DummyItem2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem3" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3/DummyItem3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem4" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3/DummyItem4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem5" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column3/DummyItem5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Column4" type="VBoxContainer" parent="Interface_Layout/Control/Control/SlotPanel/Symbols"]
+clip_contents = true
+layout_mode = 2
+alignment = 2
+
+[node name="DummyItem" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4/DummyItem"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("5_63mur")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem2" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4/DummyItem2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem3" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4/DummyItem3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem4" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4/DummyItem4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem5" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column4/DummyItem5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Column5" type="VBoxContainer" parent="Interface_Layout/Control/Control/SlotPanel/Symbols"]
+clip_contents = true
+layout_mode = 2
+alignment = 2
+
+[node name="DummyItem" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5/DummyItem"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("5_63mur")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem2" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5/DummyItem2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem3" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5/DummyItem3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem4" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5/DummyItem4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem5" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column5/DummyItem5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Column6" type="VBoxContainer" parent="Interface_Layout/Control/Control/SlotPanel/Symbols"]
+clip_contents = true
+layout_mode = 2
+alignment = 2
+
+[node name="DummyItem" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6/DummyItem"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("5_63mur")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem2" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6/DummyItem2"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem3" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6/DummyItem3"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem4" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6/DummyItem4"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem5" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/Symbols/Column6/DummyItem5"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("6_xd815")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DummyItem8" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel"]
+visible = false
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 2
+offset_left = 563.0
+offset_top = 91.0
+offset_right = 648.0
+offset_bottom = 176.0
+texture = ExtResource("2_p3mmm")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("5_81nw7")
+
+[node name="Symbol" type="TextureRect" parent="Interface_Layout/Control/Control/SlotPanel/DummyItem8"]
+custom_minimum_size = Vector2(85, 85)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -42.5
+offset_right = 42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(43, 43)
+texture = ExtResource("5_63mur")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Multiplier" type="Panel" parent="Interface_Layout/Control/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.483
+anchor_top = 0.015
+anchor_right = 0.77
+anchor_bottom = 0.114
+offset_left = 0.246979
+offset_top = 0.0949998
+offset_right = -0.0700073
+offset_bottom = -0.0780029
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_81nw7")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/Multiplier"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -25.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]x2[/center]"
+scroll_active = false
+
+[node name="StatsBar" type="Panel" parent="Interface_Layout/Control/Control"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.004
+anchor_top = 0.116
+anchor_right = 0.208
+anchor_bottom = 0.989
+offset_left = 0.236
+offset_top = -0.132034
+offset_right = 0.272003
+offset_bottom = -0.203003
+theme = ExtResource("2_t1rhp")
+script = ExtResource("13_bwk7n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface_Layout/Control/Control/StatsBar"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.092
+anchor_top = 0.02
+anchor_right = 0.915
+anchor_bottom = 0.974
+offset_left = 0.0279989
+offset_top = 2.80001
+offset_right = -0.0149994
+offset_bottom = 2.95999
+
+[node name="Item" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="Item2" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="Item3" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="Item4" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="Item5" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="Item6" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item6"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item6"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="Item7" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item7"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item7"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="Item8" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item8"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item8"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="Item9" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item9"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item9"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="Item10" type="Panel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bwk7n")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item10"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.421
+anchor_top = 0.556
+anchor_right = 0.877
+anchor_bottom = 0.556
+offset_left = 0.0059967
+offset_top = -15.02
+offset_right = 0.0219955
+offset_bottom = 14.98
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]x7[/center]"
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Control/StatsBar/VBoxContainer/Item10"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.105
+anchor_top = 0.489
+anchor_right = 0.456
+anchor_bottom = 0.489
+offset_left = 0.0299997
+offset_top = -20.005
+offset_right = 0.015995
+offset_bottom = 19.995
+texture = ExtResource("13_y7imk")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface_Layout/Control/Control/StatsBar"]
+libraries = {
+&"": SubResource("AnimationLibrary_ioys6")
+}
+
+[node name="Winnings" type="RichTextLabel" parent="Interface_Layout/Control/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.016
+anchor_top = 1.147
+anchor_right = 1.025
+anchor_bottom = 1.147
+offset_left = 0.0560007
+offset_top = -44.4691
+offset_right = -0.275085
+offset_bottom = 44.5309
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.936799, 0.560117, 0.870398, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "[center]YOU WON 0$[/center]"
+
+[node name="Panel" type="Panel" parent="Interface_Layout/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.813
+anchor_right = 0.5
+anchor_bottom = 0.813
+offset_left = -360.0
+offset_top = -121.64
+offset_right = 360.0
+offset_bottom = 122.36
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_t1rhp")
+script = ExtResource("9_08ia4")
+
+[node name="SpinButton" type="Button" parent="Interface_Layout/Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.392
+anchor_top = 0.046
+anchor_right = 0.622
+anchor_bottom = 0.733
+offset_left = -0.240021
+offset_top = 0.0179996
+offset_right = 0.159973
+offset_bottom = -0.0610046
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_t1rhp")
+text = "
+"
+
+[node name="TextureRect" type="TextureRect" parent="Interface_Layout/Control/Panel/SpinButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.505
+anchor_right = 0.5
+anchor_bottom = 0.505
+offset_left = -55.0
+offset_top = -48.8
+offset_right = 57.0
+offset_bottom = 55.2
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(56, 48)
+texture = ExtResource("4_7exka")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface_Layout/Control/Panel/SpinButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_dqosy")
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface_Layout/Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.087
+anchor_right = 0.358
+anchor_bottom = 0.305
+offset_left = 12.0
+offset_top = 0.0519981
+offset_right = 0.23999
+offset_bottom = -0.072998
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]MONEY 0[/center]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Interface_Layout/Control/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64
+anchor_top = 0.087
+anchor_right = 0.982
+anchor_bottom = 0.305
+offset_left = 0.199982
+offset_top = 15.772
+offset_right = -0.0400391
+offset_bottom = -0.419998
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]BUY FEATURE SPIN[/center]"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Interface_Layout/Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64
+anchor_top = 0.287
+anchor_right = 0.981
+anchor_bottom = 0.561
+offset_left = 0.199982
+offset_top = -0.0279999
+offset_right = -0.320068
+offset_bottom = 0.115982
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]SPINS
+1/6[/center]"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Interface_Layout/Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.229
+anchor_right = 0.358
+anchor_bottom = 0.447
+offset_left = 12.0
+offset_top = 0.0320015
+offset_right = 0.23999
+offset_bottom = -0.0930023
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]BET 0[/center]"
+scroll_active = false
+
+[node name="Button" type="Button" parent="Interface_Layout/Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.567
+anchor_right = 0.175
+anchor_bottom = 0.567
+offset_top = -33.916
+offset_bottom = 34.084
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_81nw7")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = ExtResource("10_dqosy")
+theme_override_styles/disabled_mirrored = ExtResource("10_dqosy")
+theme_override_styles/disabled = ExtResource("10_dqosy")
+theme_override_styles/hover_pressed_mirrored = ExtResource("10_dqosy")
+theme_override_styles/hover_pressed = ExtResource("10_dqosy")
+theme_override_styles/hover_mirrored = ExtResource("10_dqosy")
+theme_override_styles/hover = ExtResource("10_dqosy")
+theme_override_styles/pressed_mirrored = ExtResource("10_dqosy")
+theme_override_styles/pressed = ExtResource("10_dqosy")
+theme_override_styles/normal_mirrored = ExtResource("10_dqosy")
+theme_override_styles/normal = ExtResource("10_dqosy")
+text = "-"
+
+[node name="Button2" type="Button" parent="Interface_Layout/Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.194
+anchor_top = 0.561
+anchor_right = 0.344
+anchor_bottom = 0.561
+offset_left = 0.319992
+offset_top = -33.884
+offset_right = 0.319992
+offset_bottom = 34.116
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_81nw7")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = ExtResource("10_dqosy")
+theme_override_styles/disabled_mirrored = ExtResource("10_dqosy")
+theme_override_styles/disabled = ExtResource("10_dqosy")
+theme_override_styles/hover_pressed_mirrored = ExtResource("10_dqosy")
+theme_override_styles/hover_pressed = ExtResource("10_dqosy")
+theme_override_styles/hover_mirrored = ExtResource("10_dqosy")
+theme_override_styles/hover = ExtResource("10_dqosy")
+theme_override_styles/pressed_mirrored = ExtResource("10_dqosy")
+theme_override_styles/pressed = ExtResource("10_dqosy")
+theme_override_styles/normal_mirrored = ExtResource("10_dqosy")
+theme_override_styles/normal = ExtResource("10_dqosy")
+text = "+"
+
+[node name="HSlider" type="HSlider" parent="Interface_Layout/Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.501
+anchor_top = 0.825
+anchor_right = 0.501
+anchor_bottom = 0.825
+offset_left = -343.72
+offset_top = -12.092
+offset_right = 114.28
+offset_bottom = 3.90797
+scale = Vector2(1.5, 1.5)
+theme = ExtResource("2_t1rhp")
+min_value = 25.0
+max_value = 500.0
+step = 25.0
+value = 25.0
+scrollable = false
+tick_count = 20
+ticks_on_borders = true
+
+[node name="FeatureSpinButton" type="Button" parent="Interface_Layout/Control/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.662
+anchor_top = 0.307
+anchor_right = 0.951
+anchor_bottom = 0.627
+offset_left = 0.359955
+offset_top = 0.0919952
+offset_right = 0.279968
+offset_bottom = 0.0119934
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("8_81nw7")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = ExtResource("15_kv45b")
+theme_override_styles/disabled_mirrored = ExtResource("15_kv45b")
+theme_override_styles/disabled = ExtResource("15_kv45b")
+theme_override_styles/hover_pressed_mirrored = ExtResource("15_kv45b")
+theme_override_styles/hover_pressed = ExtResource("15_kv45b")
+theme_override_styles/hover_mirrored = ExtResource("15_kv45b")
+theme_override_styles/hover = ExtResource("15_kv45b")
+theme_override_styles/pressed_mirrored = ExtResource("15_kv45b")
+theme_override_styles/pressed = ExtResource("15_kv45b")
+theme_override_styles/normal_mirrored = ExtResource("15_kv45b")
+theme_override_styles/normal = ExtResource("15_kv45b")
+text = "3500$"
+
+[node name="InfoPanel" type="Panel" parent="Interface_Layout/Control"]
+visible = false
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.319992
+offset_top = -189.0
+offset_right = 1.12
+offset_bottom = 189.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xd815")
+script = ExtResource("12_08ia4")
+
+[node name="Title" type="RichTextLabel" parent="Interface_Layout/Control/InfoPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.212
+anchor_right = 1.0
+anchor_bottom = 0.212
+offset_top = -28.136
+offset_bottom = 27.864
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.691957, 0.000201957, 0.641985, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 38
+bbcode_enabled = true
+text = "[center]TITLE[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Content" type="RichTextLabel" parent="Interface_Layout/Control/InfoPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.047
+anchor_top = 0.36
+anchor_right = 0.945
+anchor_bottom = 0.833
+offset_left = 3.936
+offset_top = 5.92
+offset_right = 0.159973
+offset_bottom = 6.12598
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.690196, 0, 0.643137, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("8_81nw7")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[center]Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+visible_characters = 0
+visible_characters_behavior = 3
+visible_ratio = 0.0
+
+[node name="Close" type="Button" parent="Interface_Layout/Control/InfoPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.812
+anchor_top = 0.098
+anchor_right = 0.973
+anchor_bottom = 0.098
+offset_left = 2.25598
+offset_top = -24.044
+offset_right = -0.176025
+offset_bottom = 28.956
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0.690196, 0, 0.643137, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("8_81nw7")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xd815")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_08ia4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dtpcl")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_qfydw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_y7imk")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_bwk7n")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kv45b")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4mvgd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ioys6")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_b8ps5")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gaj6x")
+text = "X"
+
+[node name="Close2" type="Button" parent="Interface_Layout/Control/InfoPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.225
+anchor_top = 0.877
+anchor_right = 0.381
+anchor_bottom = 0.877
+offset_left = -0.200005
+offset_top = -26.506
+offset_right = -0.0720062
+offset_bottom = 26.494
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0.690196, 0, 0.643137, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("8_81nw7")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xd815")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_08ia4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dtpcl")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_qfydw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_y7imk")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_bwk7n")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kv45b")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4mvgd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ioys6")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_b8ps5")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gaj6x")
+text = "YES"
+
+[node name="Close3" type="Button" parent="Interface_Layout/Control/InfoPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.648
+anchor_top = 0.877
+anchor_right = 0.805
+anchor_bottom = 0.877
+offset_left = 0.223999
+offset_top = -26.506
+offset_right = -0.160034
+offset_bottom = 26.494
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0.690196, 0, 0.643137, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("8_81nw7")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xd815")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_08ia4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dtpcl")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_qfydw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_y7imk")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_bwk7n")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kv45b")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_4mvgd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ioys6")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_b8ps5")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gaj6x")
+text = "NO"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface_Layout/Control/InfoPanel"]
+libraries = {
+&"": SubResource("AnimationLibrary_bwk7n")
+}
+
+[node name="Spinnnning" type="ColorRect" parent="Interface_Layout"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -129.0
+offset_right = 152.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface_Layout"]
+libraries = {
+&"": SubResource("AnimationLibrary_81nw7")
+}
+autoplay = "Init"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Interface_Layout"]
+volume_db = -15.0
+script = ExtResource("10_63mur")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Interface_Layout"]
+stream = ExtResource("18_kv45b")
+volume_db = -25.0
+autoplay = true
+
+[connection signal="animation_finished" from="Interface_Layout/Control/Control/StatsBar/AnimationPlayer" to="Interface_Layout/Control/Control/StatsBar" method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="Interface_Layout/Control/Panel/SpinButton" to="." method="_on_spin_button_pressed"]
+[connection signal="button_down" from="Interface_Layout/Control/Panel/Button" to="Interface_Layout/Control/Panel" method="_on_button_button_down"]
+[connection signal="button_up" from="Interface_Layout/Control/Panel/Button" to="Interface_Layout/Control/Panel" method="_on_button_button_up"]
+[connection signal="pressed" from="Interface_Layout/Control/Panel/Button" to="Interface_Layout/Control/Panel" method="_on_button_pressed"]
+[connection signal="button_down" from="Interface_Layout/Control/Panel/Button2" to="Interface_Layout/Control/Panel" method="_on_button2_button_down"]
+[connection signal="button_up" from="Interface_Layout/Control/Panel/Button2" to="Interface_Layout/Control/Panel" method="_on_button_button_up"]
+[connection signal="pressed" from="Interface_Layout/Control/Panel/Button2" to="Interface_Layout/Control/Panel" method="_on_button_2_pressed"]
+[connection signal="value_changed" from="Interface_Layout/Control/Panel/HSlider" to="Interface_Layout/Control/Panel" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="Interface_Layout/Control/Panel/FeatureSpinButton" to="." method="_on_feature_spin_button_pressed"]
+[connection signal="pressed" from="Interface_Layout/Control/InfoPanel/Close" to="Interface_Layout/Control/InfoPanel" method="_on_close_pressed"]
+[connection signal="pressed" from="Interface_Layout/Control/InfoPanel/Close2" to="Interface_Layout/Control/InfoPanel" method="_on_buy_pressed"]
+[connection signal="pressed" from="Interface_Layout/Control/InfoPanel/Close3" to="Interface_Layout/Control/InfoPanel" method="_on_close_pressed"]
+[connection signal="animation_finished" from="Interface_Layout/Control/InfoPanel/AnimationPlayer" to="Interface_Layout/Control/InfoPanel" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Interface_Layout/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="finished" from="Interface_Layout/AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

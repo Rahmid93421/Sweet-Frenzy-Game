@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://cylmye0c31tmd"]
+
+[ext_resource type="FontFile" uid="uid://ba1r8ut24a4fs" path="res://assets/misc/fonts/FreeCheese-dryYR.ttf" id="1_5gu44"]
+[ext_resource type="Script" uid="uid://3bxcr3kuqhc2" path="res://scripts/intro_node.gd" id="1_c2y8g"]
+
+[sub_resource type="Animation" id="Animation_4ti67"]
+resource_name = "StartTextBack"
+length = 0.1
+
+[sub_resource type="Animation" id="Animation_c2y8g"]
+resource_name = "StartTextRoll"
+length = 0.3
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ti67"]
+_data = {
+&"StartTextBack": SubResource("Animation_4ti67"),
+&"StartTextRoll": SubResource("Animation_c2y8g")
+}
+
+[node name="IntroNode" type="Node"]
+script = ExtResource("1_c2y8g")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="IntroTitle" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -358.0
+offset_top = -43.0
+offset_right = 357.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("1_5gu44")
+theme_override_font_sizes/normal_font_size = 72
+bbcode_enabled = true
+text = "[center]Some game name[/center]"
+scroll_active = false
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_4ti67")
+}
+autoplay = "StartTextRoll"
+
+[connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
